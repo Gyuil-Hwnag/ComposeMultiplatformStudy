@@ -22,13 +22,12 @@ suspend inline fun <reified T> safeCall(
         currentCoroutineContext().ensureActive()
         return Result.Error(DataError.Remote.UNKNOWN)
     }
-
-    return responseToResult(response)
+    return response.toResult()
 }
 
-suspend inline fun <reified T> responseToResult(
-    response: HttpResponse
+suspend inline fun <reified T> HttpResponse.toResult(
 ): Result<T, DataError.Remote> {
+    val response = this
     return when(response.status.value) {
         in 200..299 -> {
             try {
