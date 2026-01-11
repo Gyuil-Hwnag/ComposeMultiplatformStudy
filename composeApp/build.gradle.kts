@@ -97,6 +97,7 @@ kotlin {
         }
         webMain.dependencies {
             implementation(npm("@js-joda/timezone", "2.22.0"))
+            implementation(libs.ktor.client.js)
         }
         nativeMain.dependencies {
             implementation(libs.ktor.client.darwin)
