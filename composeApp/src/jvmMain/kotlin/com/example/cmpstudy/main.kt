@@ -17,7 +17,7 @@ fun main() = application {
         position = WindowPosition(300.dp, 300.dp)
     )
     Window(
-        title = "Local Time App",
+        title = "BookPedia",
         onCloseRequest = ::exitApplication,
         state = state,
         alwaysOnTop = true
