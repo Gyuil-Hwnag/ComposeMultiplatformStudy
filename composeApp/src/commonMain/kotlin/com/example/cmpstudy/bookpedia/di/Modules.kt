@@ -4,7 +4,7 @@ import com.example.cmpstudy.bookpedia.book.data.datasource.RemoteBookDataSource
 import com.example.cmpstudy.bookpedia.book.data.datasource.RemoteBookDataSourceImpl
 import com.example.cmpstudy.bookpedia.book.data.repository.BookRepositoryImpl
 import com.example.cmpstudy.bookpedia.book.domain.BookRepository
-import com.example.cmpstudy.bookpedia.book.presentation.BookListViewModel
+import com.example.cmpstudy.bookpedia.book.presentation.list.BookListViewModel
 import com.example.cmpstudy.bookpedia.core.data.HttpClientFactory
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf

@@ -1,4 +1,4 @@
-package com.example.cmpstudy.bookpedia.book.presentation.component
+package com.example.cmpstudy.bookpedia.book.presentation.list.component
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -27,7 +27,7 @@ import cmpstudy.composeapp.generated.resources.book_error_2
 import coil3.compose.AsyncImagePainter
 import coil3.compose.rememberAsyncImagePainter
 import com.example.cmpstudy.bookpedia.book.domain.Book
-import com.example.cmpstudy.bookpedia.book.presentation.DEFAULT_BOOK
+import com.example.cmpstudy.bookpedia.book.presentation.list.DEFAULT_BOOK
 import com.example.cmpstudy.bookpedia.core.presentation.LightBlue
 import com.example.cmpstudy.bookpedia.core.presentation.PreviewDevices
 import com.example.cmpstudy.bookpedia.core.presentation.PulseAnimation

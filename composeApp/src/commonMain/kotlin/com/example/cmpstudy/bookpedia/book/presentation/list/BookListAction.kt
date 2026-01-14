@@ -1,4 +1,4 @@
-package com.example.cmpstudy.bookpedia.book.presentation
+package com.example.cmpstudy.bookpedia.book.presentation.list
 
 import com.example.cmpstudy.bookpedia.book.domain.Book
 

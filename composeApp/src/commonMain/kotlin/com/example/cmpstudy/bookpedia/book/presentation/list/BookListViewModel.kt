@@ -1,4 +1,4 @@
-package com.example.cmpstudy.bookpedia.book.presentation
+package com.example.cmpstudy.bookpedia.book.presentation.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

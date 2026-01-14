@@ -1,10 +1,6 @@
-package com.example.cmpstudy.bookpedia.book.presentation.component
+package com.example.cmpstudy.bookpedia.book.presentation.list.component
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
@@ -14,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.cmpstudy.bookpedia.book.domain.Book
-import com.example.cmpstudy.bookpedia.book.presentation.DEFAULT_BOOKS
+import com.example.cmpstudy.bookpedia.book.presentation.list.DEFAULT_BOOKS
 import com.example.cmpstudy.bookpedia.core.presentation.PreviewDevices
 
 @Composable
