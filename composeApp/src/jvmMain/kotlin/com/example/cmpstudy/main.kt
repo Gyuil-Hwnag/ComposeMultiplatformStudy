@@ -16,8 +16,8 @@ fun main() {
         // Size: 윈도우 앱의 사이즈
         // Position: 윈도루 앱의 위치
         val state = rememberWindowState(
-            size = DpSize(800.dp, 500.dp),
-            position = WindowPosition(300.dp, 300.dp)
+            size = DpSize(1200.dp, 800.dp),
+            position = WindowPosition(100.dp, 100.dp)
         )
         Window(
             title = "BookPedia",
