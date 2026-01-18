@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavBackStackEntry
@@ -13,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
+import androidx.navigation.toRoute
 import com.example.cmpstudy.bookpedia.app.Routes
 import com.example.cmpstudy.bookpedia.book.presentation.SelectedBookViewModel
 import com.example.cmpstudy.bookpedia.book.presentation.detail.BookDetailAction
@@ -22,6 +24,7 @@ import com.example.cmpstudy.bookpedia.book.presentation.list.BookListScreenRoot
 import com.example.cmpstudy.bookpedia.book.presentation.list.BookListViewModel
 import org.koin.compose.getKoin
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun App() {
@@ -57,7 +60,14 @@ fun App() {
                 composable<Routes.BookDetail> {
                     val selectedBookViewModel = it.sharedKoinViewModel<SelectedBookViewModel>(navController)
                     val koin = getKoin()
-                    val viewModel = remember { koin.get<BookDetailViewModel>() }
+
+                    // NOTE: koin.get() 으로 하는 경우에는 SavedStateHandle이 재대로 전달이 안됨.
+                    // Route 에서 정보를 추출해서 SavedStateHandle을 생성하여 전달
+                    val route = it.toRoute<Routes.BookDetail>()
+                    val savedStateHandle = SavedStateHandle(initialState = mapOf("id" to route.id))
+                    val viewModel = remember(route.id) {
+                        koin.get<BookDetailViewModel> { parametersOf(savedStateHandle) }
+                    }
                     val selectedBook by selectedBookViewModel.selectedBook.collectAsStateWithLifecycle()
 
                     LaunchedEffect(selectedBook) {
