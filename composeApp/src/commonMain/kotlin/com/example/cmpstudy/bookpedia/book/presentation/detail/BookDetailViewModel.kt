@@ -1,15 +1,30 @@
 package com.example.cmpstudy.bookpedia.book.presentation.detail
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
+import com.example.cmpstudy.bookpedia.app.Routes
+import com.example.cmpstudy.bookpedia.book.domain.BookRepository
+import com.example.cmpstudy.bookpedia.core.domain.onSuccess
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
-class BookDetailViewModel : ViewModel() {
+class BookDetailViewModel(
+    private val bookRepository: BookRepository,
+    savedStateHandle: SavedStateHandle
+) : ViewModel() {
+
+    private val bookId = savedStateHandle.toRoute<Routes.BookDetail>().id
 
     private val _state = MutableStateFlow(BookDetailState())
-    val state: StateFlow<BookDetailState> = _state.asStateFlow()
+    val state = _state
+        .onStart { fetchBookDescription() }
+        .stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5000L),
+            _state.value
+        )
 
     fun onAction(action: BookDetailAction) {
         when (action) {
@@ -19,6 +34,20 @@ class BookDetailViewModel : ViewModel() {
 
             is BookDetailAction.OnFavoriteClick -> {}
             else -> Unit
+        }
+    }
+
+    private fun fetchBookDescription() {
+        viewModelScope.launch {
+            bookRepository.getBookDescription(bookId)
+                .onSuccess { description ->
+                    _state.update {
+                        it.copy(
+                            book = it.book?.copy(description = description),
+                            isLoading = false
+                        )
+                    }
+                }
         }
     }
 }
