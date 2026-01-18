@@ -38,7 +38,7 @@ val sharedModule = module {
     // BookDetailViewModel은 SavedStateHandle을 필요로 하므로 factory로 정의
     factory { params ->
         BookDetailViewModel(
-            bookRepository = get(),
+            repository = get(),
             savedStateHandle = params.get()
         )
     }
