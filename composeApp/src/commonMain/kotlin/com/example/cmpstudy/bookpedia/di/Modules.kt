@@ -5,6 +5,7 @@ import com.example.cmpstudy.bookpedia.book.data.datasource.RemoteBookDataSourceI
 import com.example.cmpstudy.bookpedia.book.data.repository.BookRepositoryImpl
 import com.example.cmpstudy.bookpedia.book.domain.BookRepository
 import com.example.cmpstudy.bookpedia.book.presentation.SelectedBookViewModel
+import com.example.cmpstudy.bookpedia.book.presentation.detail.BookDetailViewModel
 import com.example.cmpstudy.bookpedia.book.presentation.list.BookListViewModel
 import com.example.cmpstudy.bookpedia.core.data.HttpClientFactory
 import org.koin.core.module.Module
@@ -21,5 +22,6 @@ val sharedModule = module {
     singleOf(::BookRepositoryImpl).bind<BookRepository>()
 
     viewModelOf(::BookListViewModel)
+    viewModelOf(::BookDetailViewModel)
     viewModelOf(::SelectedBookViewModel)
 }

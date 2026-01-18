@@ -1,16 +1,10 @@
 package com.example.cmpstudy
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavBackStackEntry
@@ -21,6 +15,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.example.cmpstudy.bookpedia.app.Routes
 import com.example.cmpstudy.bookpedia.book.presentation.SelectedBookViewModel
+import com.example.cmpstudy.bookpedia.book.presentation.detail.BookDetailAction
+import com.example.cmpstudy.bookpedia.book.presentation.detail.BookDetailScreenRoot
+import com.example.cmpstudy.bookpedia.book.presentation.detail.BookDetailViewModel
 import com.example.cmpstudy.bookpedia.book.presentation.list.BookListScreenRoot
 import com.example.cmpstudy.bookpedia.book.presentation.list.BookListViewModel
 import org.koin.compose.getKoin
@@ -59,18 +56,18 @@ fun App() {
 
                 composable<Routes.BookDetail> {
                     val selectedBookViewModel = it.sharedKoinViewModel<SelectedBookViewModel>(navController)
+                    val koin = getKoin()
+                    val viewModel = remember { koin.get<BookDetailViewModel>() }
                     val selectedBook by selectedBookViewModel.selectedBook.collectAsStateWithLifecycle()
 
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .safeContentPadding()
-                    ) {
-                        Text(
-                            text = (selectedBook?.id + selectedBook?.title + selectedBook?.description),
-                            modifier = Modifier.align(Alignment.Center)
-                        )
+                    LaunchedEffect(selectedBook) {
+                        selectedBook?.let { book -> viewModel.onAction(BookDetailAction.OnSelectedBookChange(book)) }
                     }
+
+                    BookDetailScreenRoot(
+                        viewModel = viewModel,
+                        onBackClick = { navController.navigateUp() },
+                    )
                 }
             }
         }
