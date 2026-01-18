@@ -5,6 +5,7 @@ import com.example.cmpstudy.bookpedia.book.data.datasource.RemoteBookDataSourceI
 import com.example.cmpstudy.bookpedia.book.data.repository.BookRepositoryImpl
 import com.example.cmpstudy.bookpedia.book.domain.BookRepository
 import com.example.cmpstudy.bookpedia.book.presentation.SelectedBookViewModel
+import com.example.cmpstudy.bookpedia.book.presentation.detail.BookDetailViewModel
 import com.example.cmpstudy.bookpedia.book.presentation.list.BookListViewModel
 import com.example.cmpstudy.bookpedia.core.data.HttpClientFactory
 import org.koin.core.module.Module
@@ -22,4 +23,12 @@ val sharedModule = module {
 
     viewModelOf(::BookListViewModel)
     viewModelOf(::SelectedBookViewModel)
+
+    // BookDetailViewModel은 SavedStateHandle을 필요로 하므로 factory로 정의
+    factory { params ->
+        BookDetailViewModel(
+            bookRepository = get(),
+            savedStateHandle = params.get()
+        )
+    }
 }

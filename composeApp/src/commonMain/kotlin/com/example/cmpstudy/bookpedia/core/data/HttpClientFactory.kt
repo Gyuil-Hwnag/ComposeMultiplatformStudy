@@ -36,9 +36,10 @@ object HttpClientFactory {
                 }
                 level = LogLevel.ALL
             }
-            defaultRequest {
-                contentType(ContentType.Application.Json)
-            }
+            // NOTE: Web CORS 문제로 인하여, Content-Type 헤더 제거. (Description API 불러오지 못함.)
+//            defaultRequest {
+//                contentType(ContentType.Application.Json)
+//            }
         }
     }
 }

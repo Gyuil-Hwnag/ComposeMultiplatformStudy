@@ -1,6 +1,8 @@
 package com.example.cmpstudy.bookpedia.book.data.datasource
 
+import com.example.cmpstudy.bookpedia.book.data.model.BookWorkDto
 import com.example.cmpstudy.bookpedia.book.data.model.SearchResponseDto
+import com.example.cmpstudy.bookpedia.core.domain.DataError
 import com.example.cmpstudy.bookpedia.core.domain.DataError.Remote
 import com.example.cmpstudy.bookpedia.core.domain.Result
 
@@ -9,4 +11,6 @@ interface RemoteBookDataSource {
         query: String,
         resultLimit: Int? = null
     ): Result<SearchResponseDto, Remote>
+
+    suspend fun getBookDetails(bookWorkId: String): Result<BookWorkDto, Remote>
 }
