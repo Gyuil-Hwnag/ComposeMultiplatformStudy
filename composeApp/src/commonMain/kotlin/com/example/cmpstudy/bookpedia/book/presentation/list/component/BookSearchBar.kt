@@ -1,4 +1,4 @@
-package com.example.cmpstudy.bookpedia.book.presentation.component
+package com.example.cmpstudy.bookpedia.book.presentation.list.component
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background

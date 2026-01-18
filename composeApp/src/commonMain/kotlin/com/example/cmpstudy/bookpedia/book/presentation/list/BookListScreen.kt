@@ -1,4 +1,4 @@
-package com.example.cmpstudy.bookpedia.book.presentation
+package com.example.cmpstudy.bookpedia.book.presentation.list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -20,8 +20,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cmpstudy.composeapp.generated.resources.*
 import com.example.cmpstudy.bookpedia.book.domain.Book
-import com.example.cmpstudy.bookpedia.book.presentation.component.BookList
-import com.example.cmpstudy.bookpedia.book.presentation.component.BookSearchBar
+import com.example.cmpstudy.bookpedia.book.presentation.list.component.BookList
+import com.example.cmpstudy.bookpedia.book.presentation.list.component.BookSearchBar
 import com.example.cmpstudy.bookpedia.core.presentation.DarkBlue
 import com.example.cmpstudy.bookpedia.core.presentation.DesertWhite
 import com.example.cmpstudy.bookpedia.core.presentation.SandYellow
