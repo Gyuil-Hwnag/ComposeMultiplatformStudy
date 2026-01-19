@@ -78,16 +78,14 @@ fun BookListItem(
 
                 val painterState by painter.state.collectAsStateWithLifecycle()
                 val transition by animateFloatAsState(
-                    targetValue = if (painterState is AsyncImagePainter.State.Success) {
-                        1f
-                    } else {
-                        0f
-                    },
+                    targetValue = if (painterState is AsyncImagePainter.State.Success) 1f else 0f,
                     animationSpec = tween(durationMillis = 800)
                 )
 
                 when (val result = imageLoadResult) {
-                    null -> PulseAnimation(modifier = Modifier.size(60.dp))
+                    null -> {
+                        PulseAnimation(modifier = Modifier.size(60.dp))
+                    }
                     else -> {
                         Image(
                             painter = if (result.isSuccess) painter else {

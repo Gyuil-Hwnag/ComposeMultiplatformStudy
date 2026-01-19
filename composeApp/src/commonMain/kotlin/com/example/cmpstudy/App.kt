@@ -1,5 +1,7 @@
 package com.example.cmpstudy
 
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -12,7 +14,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavBackStackEntry
-import kotlin.reflect.KClass
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -30,6 +31,7 @@ import org.koin.compose.getKoin
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.ParametersHolder
 import org.koin.core.parameter.parametersOf
+import kotlin.reflect.KClass
 
 @Composable
 fun App() {
@@ -42,7 +44,10 @@ fun App() {
             navigation<Routes.BookGraph>(
                 startDestination = Routes.BookList
             ) {
-                composable<Routes.BookList> {
+                composable<Routes.BookList>(
+                    exitTransition = { slideOutHorizontally() },
+                    popEnterTransition = { slideInHorizontally() },
+                ) {
                     val viewModel = it.koinViewModel<BookListViewModel>()
                     val selectedBookViewModel = it.sharedKoinViewModel<SelectedBookViewModel>(navController)
 
@@ -59,7 +64,10 @@ fun App() {
                     )
                 }
 
-                composable<Routes.BookDetail> {
+                composable<Routes.BookDetail>(
+                    enterTransition = { slideInHorizontally { initialOffset -> initialOffset } },
+                    exitTransition = { slideOutHorizontally { initialOffset -> initialOffset } },
+                ) {
                     val selectedBookViewModel = it.sharedKoinViewModel<SelectedBookViewModel>(navController)
 
                     val route = it.toRoute<Routes.BookDetail>()
