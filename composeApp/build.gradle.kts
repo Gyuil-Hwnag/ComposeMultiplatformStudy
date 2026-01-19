@@ -58,9 +58,6 @@ kotlin {
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
             implementation(libs.ktor.client.okhttp)
-
-            implementation(libs.androidx.room.runtime)
-            implementation(libs.sqlite.bundled)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -83,6 +80,9 @@ kotlin {
 
             implementation(libs.bundles.ktor)
             implementation(libs.bundles.coil)
+
+            implementation(libs.androidx.room.runtime)
+            implementation(libs.sqlite.bundled)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -91,9 +91,7 @@ kotlin {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
             implementation(libs.ktor.client.okhttp)
-
             implementation(libs.androidx.room.runtime)
-            implementation(libs.sqlite.bundled)
         }
         webMain.dependencies {
             implementation(npm("@js-joda/timezone", "2.22.0"))
@@ -101,9 +99,6 @@ kotlin {
         }
         nativeMain.dependencies {
             implementation(libs.ktor.client.darwin)
-
-            implementation(libs.androidx.room.runtime)
-            implementation(libs.sqlite.bundled)
         }
     }
 }
@@ -137,6 +132,17 @@ android {
 
 dependencies {
     debugImplementation(compose.uiTooling)
+
+    // Update: https://issuetracker.google.com/u/0/issues/342905180
+    listOf(
+        "kspAndroid",
+        "kspJvm",
+        "kspIosSimulatorArm64",
+        "kspIosArm64"
+    ).forEach {
+        add(it, libs.androidx.room.compiler)
+    }
+
 }
 
 compose.desktop {
