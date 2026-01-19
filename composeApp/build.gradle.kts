@@ -58,9 +58,6 @@ kotlin {
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
             implementation(libs.ktor.client.okhttp)
-
-            implementation(libs.androidx.room.runtime)
-            implementation(libs.sqlite.bundled)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -83,6 +80,9 @@ kotlin {
 
             implementation(libs.bundles.ktor)
             implementation(libs.bundles.coil)
+
+            implementation(libs.androidx.room.runtime)
+            implementation(libs.sqlite.bundled)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -92,7 +92,6 @@ kotlin {
             implementation(libs.kotlinx.coroutinesSwing)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.androidx.room.runtime)
-            implementation(libs.sqlite.bundled)
         }
         webMain.dependencies {
             implementation(npm("@js-joda/timezone", "2.22.0"))
@@ -100,8 +99,6 @@ kotlin {
         }
         nativeMain.dependencies {
             implementation(libs.ktor.client.darwin)
-            implementation(libs.androidx.room.runtime)
-            implementation(libs.sqlite.bundled)
         }
     }
 }
