@@ -1,6 +1,6 @@
 package com.example.cmpstudy.bookpedia.book.data.mapper
 
-import com.example.cmpstudy.bookpedia.book.data.database.BookEntity
+import com.example.cmpstudy.bookpedia.book.data.model.BookDto
 import com.example.cmpstudy.bookpedia.book.data.model.SearchedBookDto
 import com.example.cmpstudy.bookpedia.book.domain.Book
 
@@ -24,8 +24,8 @@ fun SearchedBookDto.toBook(): Book {
     )
 }
 
-fun Book.toBookEntity(): BookEntity {
-    return BookEntity(
+fun Book.toDto(): BookDto {
+    return BookDto(
         id = id,
         title = title,
         description = description,
@@ -40,7 +40,7 @@ fun Book.toBookEntity(): BookEntity {
     )
 }
 
-fun BookEntity.toBook(): Book {
+fun BookDto.toBook(): Book {
     return Book(
         id = id,
         title = title,

@@ -17,6 +17,7 @@ plugins {
 }
 
 kotlin {
+    // --- Targets Configuration ---
     androidTarget {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
@@ -35,10 +36,6 @@ kotlin {
 
     jvm()
 
-    room {
-        schemaDirectory("$projectDir/schemas")
-    }
-
     js {
         browser()
         binaries.executable()
@@ -50,55 +47,109 @@ kotlin {
         binaries.executable()
     }
 
+    // --- Room Configuration ---
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
+
+    // --- Source Sets ---
     sourceSets {
-        androidMain.dependencies {
-            implementation(compose.preview)
-            implementation(libs.androidx.activity.compose)
+        val commonMain by getting {
+            dependencies {
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material3)
+                implementation(compose.ui)
+                implementation(compose.components.resources)
+                implementation(compose.components.uiToolingPreview)
+                implementation(libs.androidx.lifecycle.viewmodelCompose)
+                implementation(libs.androidx.lifecycle.runtimeCompose)
+                implementation(libs.kotlinx.datetime)
 
-            implementation(libs.koin.android)
-            implementation(libs.koin.androidx.compose)
-            implementation(libs.ktor.client.okhttp)
-        }
-        commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
-            implementation(libs.androidx.lifecycle.viewmodelCompose)
-            implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation(libs.kotlinx.datetime)
+                implementation(libs.androidx.lifecycle.viewmodel)
+                implementation(libs.jetbrains.compose.navigation)
+                implementation(libs.kotlinx.serialization.json)
+                implementation(libs.koin.compose)
+                implementation(libs.koin.compose.viewmodel)
+                api(libs.koin.core)
+                implementation(compose.materialIconsExtended)
 
-            implementation(libs.androidx.lifecycle.viewmodel)
-            implementation(libs.jetbrains.compose.navigation)
-            implementation(libs.kotlinx.serialization.json)
-            implementation(libs.koin.compose)
-            implementation(libs.koin.compose.viewmodel)
-            api(libs.koin.core)
-            implementation(compose.materialIconsExtended)
+                implementation(libs.bundles.ktor)
+                implementation(libs.bundles.coil)
+            }
+        }
 
-            implementation(libs.bundles.ktor)
-            implementation(libs.bundles.coil)
+        val commonTest by getting {
+            dependencies {
+                implementation(libs.kotlin.test)
+            }
+        }
 
-            implementation(libs.androidx.room.runtime)
-            implementation(libs.sqlite.bundled)
+        // --- Intermediate Source Sets ---
+
+        // 1. Non-Web (Supports Room & SQLite)
+        // Includes: Android, iOS, JVM
+        val nonWebMain by creating {
+            dependsOn(commonMain)
+            dependencies {
+                implementation(libs.androidx.room.runtime)
+                implementation(libs.sqlite.bundled)
+            }
         }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
+
+        // 2. Web (In-Memory Storage)
+        // Includes: JS, Wasm
+        val webMain by creating {
+            dependsOn(commonMain)
+            dependencies {
+                implementation(npm("@js-joda/timezone", "2.22.0"))
+                implementation(libs.ktor.client.js)
+            }
         }
-        jvmMain.dependencies {
-            implementation(compose.desktop.currentOs)
-            implementation(libs.kotlinx.coroutinesSwing)
-            implementation(libs.ktor.client.okhttp)
-            implementation(libs.androidx.room.runtime)
+
+        // --- Platform Source Sets ---
+
+        androidMain {
+            dependsOn(nonWebMain)
+            dependencies {
+                implementation(compose.preview)
+                implementation(libs.androidx.activity.compose)
+                implementation(libs.koin.android)
+                implementation(libs.koin.androidx.compose)
+                implementation(libs.ktor.client.okhttp)
+            }
         }
-        webMain.dependencies {
-            implementation(npm("@js-joda/timezone", "2.22.0"))
-            implementation(libs.ktor.client.js)
+
+        jvmMain {
+            dependsOn(nonWebMain)
+            dependencies {
+                implementation(compose.desktop.currentOs)
+                implementation(libs.kotlinx.coroutinesSwing)
+                implementation(libs.ktor.client.okhttp)
+            }
         }
-        nativeMain.dependencies {
-            implementation(libs.ktor.client.darwin)
+
+        val iosMain by creating {
+            dependsOn(nonWebMain)
+            dependencies {
+                implementation(libs.ktor.client.darwin)
+            }
+        }
+
+        val iosArm64Main by getting {
+            dependsOn(iosMain)
+        }
+
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosMain)
+        }
+
+        jsMain {
+            dependsOn(webMain)
+        }
+
+        wasmJsMain {
+            dependsOn(webMain)
         }
     }
 }
@@ -142,7 +193,6 @@ dependencies {
     ).forEach {
         add(it, libs.androidx.room.compiler)
     }
-
 }
 
 compose.desktop {
