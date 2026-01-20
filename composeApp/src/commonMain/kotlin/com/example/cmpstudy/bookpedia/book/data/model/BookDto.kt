@@ -1,11 +1,7 @@
-package com.example.cmpstudy.bookpedia.book.data.database
+package com.example.cmpstudy.bookpedia.book.data.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity
-data class BookEntity(
-    @PrimaryKey(autoGenerate = false) val id: String,
+data class BookDto(
+    val id: String,
     val title: String,
     val description: String?,
     val imageUrl: String,
