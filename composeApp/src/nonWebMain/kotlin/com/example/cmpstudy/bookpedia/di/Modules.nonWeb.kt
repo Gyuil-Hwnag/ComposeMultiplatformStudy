@@ -16,4 +16,7 @@ val nonWebDatabaseModule = module {
 
     single { get<FavoriteBookDatabase>().favoriteBookDao }
 
+    single<FavoriteBookDataSource> {
+        FavoriteBookDataSourceImpl(get())
+    }
 }
