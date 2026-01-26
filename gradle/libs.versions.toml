@@ -27,6 +27,8 @@ ksp = "2.2.21-2.0.4"
 sqlite = "2.5.0-alpha11"
 room = "2.7.0-alpha11"
 
+firebase-auth = "2.4.0"
+
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-testJunit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
@@ -72,6 +74,8 @@ coil-mp = { module = "io.coil-kt.coil3:coil", version.ref = "coil3" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+
+firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebase-auth" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
