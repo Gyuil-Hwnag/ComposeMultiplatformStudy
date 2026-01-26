@@ -33,6 +33,7 @@ fun LoginScreenContent(
     onPasswordChange: (String) -> Unit,
     onSignInClick: () -> Unit,
     isProcessing: Boolean,
+    isButtonEnabled: Boolean,
     currentUser: User?,
     isError: Boolean,
     onSignOut: () -> Unit,
@@ -86,6 +87,7 @@ fun LoginScreenContent(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(48.dp),
+                    enabled = isButtonEnabled,
                     onClick = onSignInClick
                 ) {
                     Text("SIGN IN")
