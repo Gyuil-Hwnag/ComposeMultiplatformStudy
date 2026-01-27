@@ -41,11 +41,12 @@ kotlin {
         binaries.executable()
     }
 
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        browser()
-        binaries.executable()
-    }
+    // WasmJS는 Firebase를 지원하지 않으므로 주석 처리
+//    @OptIn(ExperimentalWasmDsl::class)
+//    wasmJs {
+//        browser()
+//        binaries.executable()
+//    }
 
     // --- Room Configuration ---
     room {
@@ -149,9 +150,9 @@ kotlin {
             dependsOn(webMain)
         }
 
-        wasmJsMain {
-            dependsOn(webMain)
-        }
+//        wasmJsMain {
+//            dependsOn(webMain)
+//        }
     }
 }
 
