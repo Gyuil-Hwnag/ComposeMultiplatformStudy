@@ -49,6 +49,17 @@ cp composeApp/src/webMain/kotlin/com/example/cmpstudy/FirebaseConfig.kt.example 
 - `apiKey`
 - `projectId`
 
+### 4. JVM/Desktop
+
+```bash
+cp composeApp/src/jvmMain/kotlin/com/example/cmpstudy/FirebaseConfig.kt.example \
+   composeApp/src/jvmMain/kotlin/com/example/cmpstudy/FirebaseConfig.kt
+```
+
+`FirebaseConfig.kt` 파일을 열고 **Web 앱과 동일한 설정 값**을 사용합니다:
+- Firebase Console에 JVM 플랫폼은 없으므로 Web 설정을 재사용합니다
+- JVM은 내부적으로 Firebase REST API를 사용하므로 Web 설정이 적합합니다
+
 ## Firebase Console에서 설정 값 받기
 
 1. [Firebase Console](https://console.firebase.google.com/) 접속
