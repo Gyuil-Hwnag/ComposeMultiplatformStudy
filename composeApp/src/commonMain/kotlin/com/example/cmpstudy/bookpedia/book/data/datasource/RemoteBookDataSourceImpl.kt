@@ -3,9 +3,9 @@ package com.example.cmpstudy.bookpedia.book.data.datasource
 import com.example.cmpstudy.bookpedia.book.data.BASE_URL
 import com.example.cmpstudy.bookpedia.book.data.model.BookWorkDto
 import com.example.cmpstudy.bookpedia.book.data.model.SearchResponseDto
-import com.example.cmpstudy.bookpedia.core.data.safeCall
-import com.example.cmpstudy.bookpedia.core.domain.DataError
-import com.example.cmpstudy.bookpedia.core.domain.Result
+import com.example.cmpstudy.core.data.safeCall
+import com.example.cmpstudy.core.domain.DataError
+import com.example.cmpstudy.core.domain.Result
 import io.ktor.client.*
 import io.ktor.client.request.*
 

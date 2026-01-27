@@ -6,10 +6,10 @@ import com.example.cmpstudy.bookpedia.book.data.mapper.toBook
 import com.example.cmpstudy.bookpedia.book.data.mapper.toDto
 import com.example.cmpstudy.bookpedia.book.domain.Book
 import com.example.cmpstudy.bookpedia.book.domain.BookRepository
-import com.example.cmpstudy.bookpedia.core.domain.DataError
-import com.example.cmpstudy.bookpedia.core.domain.EmptyResult
-import com.example.cmpstudy.bookpedia.core.domain.Result
-import com.example.cmpstudy.bookpedia.core.domain.map
+import com.example.cmpstudy.core.domain.DataError
+import com.example.cmpstudy.core.domain.EmptyResult
+import com.example.cmpstudy.core.domain.Result
+import com.example.cmpstudy.core.domain.map
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

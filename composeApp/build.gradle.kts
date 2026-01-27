@@ -41,11 +41,12 @@ kotlin {
         binaries.executable()
     }
 
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        browser()
-        binaries.executable()
-    }
+    // WasmJS는 Firebase를 지원하지 않으므로 주석 처리
+//    @OptIn(ExperimentalWasmDsl::class)
+//    wasmJs {
+//        browser()
+//        binaries.executable()
+//    }
 
     // --- Room Configuration ---
     room {
@@ -76,6 +77,8 @@ kotlin {
 
                 implementation(libs.bundles.ktor)
                 implementation(libs.bundles.coil)
+
+                implementation(libs.firebase.auth)
             }
         }
 
@@ -108,7 +111,6 @@ kotlin {
         }
 
         // --- Platform Source Sets ---
-
         androidMain {
             dependsOn(nonWebMain)
             dependencies {
@@ -148,9 +150,9 @@ kotlin {
             dependsOn(webMain)
         }
 
-        wasmJsMain {
-            dependsOn(webMain)
-        }
+//        wasmJsMain {
+//            dependsOn(webMain)
+//        }
     }
 }
 

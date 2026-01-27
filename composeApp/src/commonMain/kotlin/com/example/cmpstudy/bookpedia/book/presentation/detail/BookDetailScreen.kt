@@ -22,7 +22,7 @@ import com.example.cmpstudy.bookpedia.book.presentation.detail.component.Blurred
 import com.example.cmpstudy.bookpedia.book.presentation.detail.component.BookChip
 import com.example.cmpstudy.bookpedia.book.presentation.detail.component.ChipSize
 import com.example.cmpstudy.bookpedia.book.presentation.detail.component.TitledContent
-import com.example.cmpstudy.bookpedia.core.presentation.SandYellow
+import com.example.cmpstudy.core.presentation.SandYellow
 import org.jetbrains.compose.resources.stringResource
 import kotlin.math.round
 

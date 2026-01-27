@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.cmpstudy.bookpedia.book.domain.Book
 import com.example.cmpstudy.bookpedia.book.presentation.list.DEFAULT_BOOKS
-import com.example.cmpstudy.bookpedia.core.presentation.PreviewDevices
+import com.example.cmpstudy.core.presentation.PreviewDevices
 
 @Composable
 fun BookList(

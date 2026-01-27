@@ -22,9 +22,9 @@ import cmpstudy.composeapp.generated.resources.*
 import com.example.cmpstudy.bookpedia.book.domain.Book
 import com.example.cmpstudy.bookpedia.book.presentation.list.component.BookList
 import com.example.cmpstudy.bookpedia.book.presentation.list.component.BookSearchBar
-import com.example.cmpstudy.bookpedia.core.presentation.DarkBlue
-import com.example.cmpstudy.bookpedia.core.presentation.DesertWhite
-import com.example.cmpstudy.bookpedia.core.presentation.SandYellow
+import com.example.cmpstudy.core.presentation.DarkBlue
+import com.example.cmpstudy.core.presentation.DesertWhite
+import com.example.cmpstudy.core.presentation.SandYellow
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 

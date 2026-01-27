@@ -8,7 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.example.cmpstudy.bookpedia.core.presentation.LightBlue
+import com.example.cmpstudy.core.presentation.LightBlue
 
 @Composable
 fun BookChip(

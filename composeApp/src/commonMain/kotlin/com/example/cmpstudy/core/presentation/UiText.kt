@@ -1,4 +1,4 @@
-package com.example.cmpstudy.bookpedia.core.presentation
+package com.example.cmpstudy.core.presentation
 
 import androidx.compose.runtime.Composable
 import org.jetbrains.compose.resources.StringResource

@@ -2,9 +2,8 @@ package com.example.cmpstudy.bookpedia.book.data.datasource
 
 import com.example.cmpstudy.bookpedia.book.data.model.BookWorkDto
 import com.example.cmpstudy.bookpedia.book.data.model.SearchResponseDto
-import com.example.cmpstudy.bookpedia.core.domain.DataError
-import com.example.cmpstudy.bookpedia.core.domain.DataError.Remote
-import com.example.cmpstudy.bookpedia.core.domain.Result
+import com.example.cmpstudy.core.domain.DataError.Remote
+import com.example.cmpstudy.core.domain.Result
 
 interface RemoteBookDataSource {
     suspend fun searchBooks(

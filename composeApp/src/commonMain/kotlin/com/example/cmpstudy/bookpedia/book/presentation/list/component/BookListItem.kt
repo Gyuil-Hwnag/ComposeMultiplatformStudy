@@ -28,10 +28,10 @@ import coil3.compose.AsyncImagePainter
 import coil3.compose.rememberAsyncImagePainter
 import com.example.cmpstudy.bookpedia.book.domain.Book
 import com.example.cmpstudy.bookpedia.book.presentation.list.DEFAULT_BOOK
-import com.example.cmpstudy.bookpedia.core.presentation.LightBlue
-import com.example.cmpstudy.bookpedia.core.presentation.PreviewDevices
-import com.example.cmpstudy.bookpedia.core.presentation.PulseAnimation
-import com.example.cmpstudy.bookpedia.core.presentation.SandYellow
+import com.example.cmpstudy.core.presentation.LightBlue
+import com.example.cmpstudy.core.presentation.PreviewDevices
+import com.example.cmpstudy.core.presentation.PulseAnimation
+import com.example.cmpstudy.core.presentation.SandYellow
 import org.jetbrains.compose.resources.painterResource
 import kotlin.math.round
 

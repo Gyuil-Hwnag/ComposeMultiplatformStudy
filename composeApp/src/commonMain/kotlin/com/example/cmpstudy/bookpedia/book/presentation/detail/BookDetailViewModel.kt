@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.example.cmpstudy.bookpedia.app.Routes
 import com.example.cmpstudy.bookpedia.book.domain.BookRepository
-import com.example.cmpstudy.bookpedia.core.domain.onSuccess
+import com.example.cmpstudy.core.domain.onSuccess
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 

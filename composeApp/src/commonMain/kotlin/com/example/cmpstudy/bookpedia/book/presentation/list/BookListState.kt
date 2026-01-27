@@ -1,7 +1,7 @@
 package com.example.cmpstudy.bookpedia.book.presentation.list
 
 import com.example.cmpstudy.bookpedia.book.domain.Book
-import com.example.cmpstudy.bookpedia.core.presentation.UiText
+import com.example.cmpstudy.core.presentation.UiText
 
 data class BookListState(
     val searchQuery: String = "Kotlin",

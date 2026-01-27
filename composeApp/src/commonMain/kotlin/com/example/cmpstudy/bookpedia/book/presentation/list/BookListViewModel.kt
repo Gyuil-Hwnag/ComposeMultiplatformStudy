@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cmpstudy.bookpedia.book.domain.Book
 import com.example.cmpstudy.bookpedia.book.domain.BookRepository
-import com.example.cmpstudy.bookpedia.core.domain.onError
-import com.example.cmpstudy.bookpedia.core.domain.onSuccess
-import com.example.cmpstudy.bookpedia.core.presentation.toUiText
+import com.example.cmpstudy.core.domain.onError
+import com.example.cmpstudy.core.domain.onSuccess
+import com.example.cmpstudy.core.presentation.toUiText
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*

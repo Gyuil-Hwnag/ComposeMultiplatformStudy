@@ -1,8 +1,8 @@
 package com.example.cmpstudy.bookpedia.book.domain
 
-import com.example.cmpstudy.bookpedia.core.domain.DataError
-import com.example.cmpstudy.bookpedia.core.domain.EmptyResult
-import com.example.cmpstudy.bookpedia.core.domain.Result
+import com.example.cmpstudy.core.domain.DataError
+import com.example.cmpstudy.core.domain.EmptyResult
+import com.example.cmpstudy.core.domain.Result
 import kotlinx.coroutines.flow.Flow
 
 interface BookRepository {
