@@ -20,7 +20,6 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import cmpstudy.composeapp.generated.resources.Res
 import cmpstudy.composeapp.generated.resources.authentication
-import com.example.cmpstudy.login.domain.User
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
@@ -32,10 +31,6 @@ fun LoginScreenContent(
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onSignInClick: () -> Unit,
-    isProcessing: Boolean,
-    isButtonEnabled: Boolean,
-    currentUser: User?,
-    isError: Boolean,
     onSignOut: () -> Unit,
 ) {
     BoxWithConstraints(
@@ -43,9 +38,13 @@ fun LoginScreenContent(
         contentAlignment = Alignment.Center
     ) {
         val width = this.maxWidth
-        val finalModifier = if (width >= 780.dp) modifier.width(400.dp) else modifier.fillMaxWidth()
+        val columnModifier = if (width >= 780.dp) {
+            modifier.width(400.dp)
+        } else {
+            modifier.fillMaxWidth()
+        }
         Column(
-            modifier = finalModifier
+            modifier = columnModifier
                 .padding(16.dp)
                 .fillMaxHeight()
                 .verticalScroll(rememberScrollState()),
@@ -80,14 +79,14 @@ fun LoginScreenContent(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            if (isProcessing) {
+            if (uiState.isLoading) {
                 CircularProgressIndicator()
             } else {
                 Button(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(48.dp),
-                    enabled = isButtonEnabled,
+                    enabled = uiState.isButtonEnabled,
                     onClick = onSignInClick
                 ) {
                     Text("SIGN IN")
@@ -96,32 +95,34 @@ fun LoginScreenContent(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            AnimatedVisibility(currentUser != null && !currentUser.isAnonymous) {
+            AnimatedVisibility(uiState.isLoggedIn && !uiState.hasError) {
                 Column(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.Start)
-                {
+                    horizontalAlignment = Alignment.Start
+                ) {
                     Text("Login Successful", color = Color.Green.copy(alpha = 0.5f))
-                    Text("Logged In auth.User ID:")
-                    Text("${currentUser?.id}")
+                    Text("Logged In User ID:")
+                    Text("${uiState.currentUser?.id}")
                     TextButton(
                         contentPadding = PaddingValues(0.dp),
-                        onClick = { onSignOut() }
+                        onClick = onSignOut
                     ) {
                         Text("Log Out")
                     }
                 }
             }
 
-            AnimatedVisibility(isError) {
+            AnimatedVisibility(uiState.hasError) {
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.Start
                 ) {
-                    Text("Error in email or password!", color = MaterialTheme.colorScheme.error)
+                    Text(
+                        text = uiState.errorMessage ?: "",
+                        color = MaterialTheme.colorScheme.error
+                    )
                 }
             }
         }
     }
-
 }
