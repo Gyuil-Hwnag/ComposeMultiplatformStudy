@@ -1,7 +1,7 @@
-package com.example.cmpstudy.bookpedia.core.data
+package com.example.cmpstudy.core.data
 
-import com.example.cmpstudy.bookpedia.core.domain.DataError
-import com.example.cmpstudy.bookpedia.core.domain.Result
+import com.example.cmpstudy.core.domain.DataError
+import com.example.cmpstudy.core.domain.Result
 import io.ktor.client.call.*
 import io.ktor.client.network.sockets.*
 import io.ktor.client.statement.*

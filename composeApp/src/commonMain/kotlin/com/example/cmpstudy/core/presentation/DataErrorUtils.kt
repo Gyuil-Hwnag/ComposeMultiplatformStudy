@@ -1,4 +1,4 @@
-package com.example.cmpstudy.bookpedia.core.presentation
+package com.example.cmpstudy.core.presentation
 
 import cmpstudy.composeapp.generated.resources.Res
 import cmpstudy.composeapp.generated.resources.error_disk_full
@@ -7,7 +7,7 @@ import cmpstudy.composeapp.generated.resources.error_request_timeout
 import cmpstudy.composeapp.generated.resources.error_serialization
 import cmpstudy.composeapp.generated.resources.error_too_many_requests
 import cmpstudy.composeapp.generated.resources.error_unknown
-import com.example.cmpstudy.bookpedia.core.domain.DataError
+import com.example.cmpstudy.core.domain.DataError
 
 fun DataError.toUiText(): UiText {
     val stringRes = when(this) {

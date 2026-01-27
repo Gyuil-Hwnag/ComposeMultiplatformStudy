@@ -22,10 +22,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import cmpstudy.composeapp.generated.resources.Res
 import cmpstudy.composeapp.generated.resources.close_hint
 import cmpstudy.composeapp.generated.resources.search_hint
-import com.example.cmpstudy.bookpedia.core.presentation.DarkBlue
-import com.example.cmpstudy.bookpedia.core.presentation.DesertWhite
-import com.example.cmpstudy.bookpedia.core.presentation.PreviewDevices
-import com.example.cmpstudy.bookpedia.core.presentation.SandYellow
+import com.example.cmpstudy.core.presentation.DarkBlue
+import com.example.cmpstudy.core.presentation.DesertWhite
+import com.example.cmpstudy.core.presentation.PreviewDevices
+import com.example.cmpstudy.core.presentation.SandYellow
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

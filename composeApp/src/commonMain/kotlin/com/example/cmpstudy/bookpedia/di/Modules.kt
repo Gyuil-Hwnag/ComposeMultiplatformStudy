@@ -7,7 +7,7 @@ import com.example.cmpstudy.bookpedia.book.domain.BookRepository
 import com.example.cmpstudy.bookpedia.book.presentation.SelectedBookViewModel
 import com.example.cmpstudy.bookpedia.book.presentation.detail.BookDetailViewModel
 import com.example.cmpstudy.bookpedia.book.presentation.list.BookListViewModel
-import com.example.cmpstudy.bookpedia.core.data.HttpClientFactory
+import com.example.cmpstudy.core.data.HttpClientFactory
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf

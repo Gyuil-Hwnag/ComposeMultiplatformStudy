@@ -25,11 +25,9 @@ import com.example.cmpstudy.bookpedia.book.presentation.detail.BookDetailScreenR
 import com.example.cmpstudy.bookpedia.book.presentation.detail.BookDetailViewModel
 import com.example.cmpstudy.bookpedia.book.presentation.list.BookListScreenRoot
 import com.example.cmpstudy.bookpedia.book.presentation.list.BookListViewModel
-import org.koin.compose.getKoin
-import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.parameter.ParametersHolder
+import com.example.cmpstudy.core.presentation.koinViewModel
+import com.example.cmpstudy.core.presentation.sharedKoinViewModel
 import org.koin.core.parameter.parametersOf
-import kotlin.reflect.KClass
 
 @Composable
 fun BookPediaScreen() {
@@ -87,47 +85,3 @@ fun BookPediaScreen() {
 }
 
 
-/**
- * NOTE
- * 1. koinViewModel 이 WebMain 에서는 동작하지 않아서 koin.get() 으로 주입 받아야 함.
- * do not val viewModel = koinViewModel<BookListViewModel>()
- *
- * 2. koin.get() 으로 하는 경우에는 SavedStateHandle이 재대로 전달이 안됨.
- * Route 에서 정보를 추출해서 SavedStateHandle을 생성하여 전달
- *
- * 3. getKoin()으로 ViewModel을 생성할 경우 해당 화면으로 돌아오면 ViewModel 이 초기화 되어 ViewModelStoreOwner를 지정해야 함.
- **/
-@Composable
-private inline fun <reified T : ViewModel> NavBackStackEntry.koinViewModel(
-    key: String? = null,
-    noinline getParameters: (() -> ParametersHolder)? = null
-): T {
-    val koin = getKoin()
-    val factory = remember(key) {
-        object : ViewModelProvider.Factory {
-            override fun <VM : ViewModel> create(modelClass: KClass<VM>, extras: CreationExtras): VM {
-                @Suppress("UNCHECKED_CAST")
-                return if (getParameters != null) {
-                    koin.get<T>(parameters = getParameters) as VM
-                } else {
-                    koin.get<T>() as VM
-                }
-            }
-        }
-    }
-    return viewModel(
-        viewModelStoreOwner = this,
-        key = key,
-        factory = factory
-    )
-}
-
-
-@Composable
-private inline fun <reified T : ViewModel> NavBackStackEntry.sharedKoinViewModel(
-    navController: NavController
-): T {
-    val navGraphRoute = destination.parent?.route ?: return koinViewModel<T>()
-    val parentEntry = remember(this) { navController.getBackStackEntry(navGraphRoute) }
-    return koinViewModel(viewModelStoreOwner = parentEntry)
-}

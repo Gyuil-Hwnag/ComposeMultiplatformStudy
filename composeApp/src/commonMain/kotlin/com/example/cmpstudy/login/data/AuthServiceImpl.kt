@@ -10,9 +10,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class AuthServiceImpl(
-    val auth: FirebaseAuth,
-    val scope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+    val auth: FirebaseAuth
 ) : AuthService {
+
+    private val scope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
     override val currentUserId: String
         get() = auth.currentUser?.uid.toString()
@@ -35,7 +36,7 @@ class AuthServiceImpl(
     }
 
     override suspend fun createUser(email: String, password: String) {
-        val result = launchWithAwait {
+        launchWithAwait {
             auth.createUserWithEmailAndPassword(email, password)
         }
     }

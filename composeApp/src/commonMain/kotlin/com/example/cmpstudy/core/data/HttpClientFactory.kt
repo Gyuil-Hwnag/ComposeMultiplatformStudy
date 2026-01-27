@@ -1,4 +1,4 @@
-package com.example.cmpstudy.bookpedia.core.data
+package com.example.cmpstudy.core.data
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine

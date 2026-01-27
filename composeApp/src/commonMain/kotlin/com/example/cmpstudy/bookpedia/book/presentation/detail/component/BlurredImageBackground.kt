@@ -29,10 +29,10 @@ import cmpstudy.composeapp.generated.resources.go_back
 import cmpstudy.composeapp.generated.resources.mark_as_favorite
 import cmpstudy.composeapp.generated.resources.remove_from_favorites
 import coil3.compose.rememberAsyncImagePainter
-import com.example.cmpstudy.bookpedia.core.presentation.DarkBlue
-import com.example.cmpstudy.bookpedia.core.presentation.DesertWhite
-import com.example.cmpstudy.bookpedia.core.presentation.PulseAnimation
-import com.example.cmpstudy.bookpedia.core.presentation.SandYellow
+import com.example.cmpstudy.core.presentation.DarkBlue
+import com.example.cmpstudy.core.presentation.DesertWhite
+import com.example.cmpstudy.core.presentation.PulseAnimation
+import com.example.cmpstudy.core.presentation.SandYellow
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 

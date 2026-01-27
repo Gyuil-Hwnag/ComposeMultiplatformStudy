@@ -1,4 +1,4 @@
-package com.example.cmpstudy.bookpedia.core.domain
+package com.example.cmpstudy.core.domain
 
 sealed interface DataError: Error {
     enum class Remote: DataError {
