@@ -79,6 +79,9 @@ kotlin {
                 implementation(libs.bundles.coil)
 
                 implementation(libs.firebase.auth)
+
+                implementation(libs.file.picker)
+                implementation(libs.file.picker.coil)
             }
         }
 

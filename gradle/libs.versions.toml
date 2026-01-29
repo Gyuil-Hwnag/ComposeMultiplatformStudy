@@ -27,7 +27,11 @@ ksp = "2.2.21-2.0.4"
 sqlite = "2.5.0-alpha11"
 room = "2.7.0-alpha11"
 
-firebase-auth = "2.4.0"
+## https://github.com/GitLiveApp/firebase-kotlin-sdk
+firebaseAuth = "2.4.0"
+## https://github.com/MohamedRejeb/Calf/blob/main/docs/filepicker.md
+filePicker = "0.9.0"
+filePickerCoil = "0.5.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -75,7 +79,9 @@ androidx-room-compiler = { group = "androidx.room", name = "room-compiler", vers
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 
-firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebase-auth" }
+firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebaseAuth" }
+file-picker = { module = "com.mohamedrejeb.calf:calf-file-picker", version.ref = "filePicker" }
+file-picker-coil = { module = "com.mohamedrejeb.calf:calf-file-picker-coil", version.ref = "filePickerCoil" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
