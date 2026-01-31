@@ -11,7 +11,9 @@ import com.example.cmpstudy.permission.presentation.PermissionViewModel
 
 @Composable
 fun PermissionScreenRoot() {
+
     val viewModel = koinViewModel<PermissionViewModel>()
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize()

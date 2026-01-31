@@ -82,6 +82,8 @@ kotlin {
 
                 implementation(libs.file.picker)
                 implementation(libs.file.picker.coil)
+
+                implementation(libs.permissions)
             }
         }
 
