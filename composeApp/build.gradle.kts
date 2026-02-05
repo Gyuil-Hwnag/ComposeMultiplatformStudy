@@ -84,7 +84,6 @@ kotlin {
                 implementation(libs.file.picker.coil)
 
                 implementation(libs.permissions)
-                api(libs.compose.webview)
             }
         }
 
@@ -103,6 +102,7 @@ kotlin {
             dependencies {
                 implementation(libs.androidx.room.runtime)
                 implementation(libs.sqlite.bundled)
+                api(libs.compose.webview)
             }
         }
 
@@ -211,6 +211,20 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "com.example.cmpstudy"
             packageVersion = "1.0.0"
+        }
+    }
+}
+
+// NOTE: Desktop(Jvm) WebView 기능을 위한 설정 추가.
+afterEvaluate {
+    tasks.withType<JavaExec> {
+        jvmArgs("--add-opens", "java.desktop/sun.awt=ALL-UNNAMED")
+        jvmArgs("--add-opens", "java.desktop/java.awt.peer=ALL-UNNAMED") // recommended but not necessary
+
+        if (System.getProperty("os.name").contains("Mac")) {
+            jvmArgs("--add-opens", "java.desktop/sun.awt=ALL-UNNAMED")
+            jvmArgs("--add-opens", "java.desktop/sun.lwawt=ALL-UNNAMED")
+            jvmArgs("--add-opens", "java.desktop/sun.lwawt.macosx=ALL-UNNAMED")
         }
     }
 }
