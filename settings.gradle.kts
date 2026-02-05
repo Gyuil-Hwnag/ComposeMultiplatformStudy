@@ -25,6 +25,8 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
+
+        maven("https://jogamp.org/deployment/maven")
     }
 }
 

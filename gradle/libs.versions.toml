@@ -34,6 +34,8 @@ filePicker = "0.9.0"
 filePickerCoil = "0.5.1"
 ## https://github.com/MohamedRejeb/Calf/blob/main/docs/permissions.md
 permissions = "0.9.0"
+## https://github.com/KevinnZou/compose-webview/releases/tag/0.33.6
+webview = "0.33.6"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -85,6 +87,7 @@ firebase-auth = { module = "dev.gitlive:firebase-auth", version.ref = "firebaseA
 file-picker = { module = "com.mohamedrejeb.calf:calf-file-picker", version.ref = "filePicker" }
 file-picker-coil = { module = "com.mohamedrejeb.calf:calf-file-picker-coil", version.ref = "filePickerCoil" }
 permissions = { module = "com.mohamedrejeb.calf:calf-permissions", version.ref = "permissions" }
+compose-webview = { module = "io.github.kevinnzou:compose-webview", version.ref = "webview" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

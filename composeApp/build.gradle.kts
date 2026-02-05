@@ -84,6 +84,7 @@ kotlin {
                 implementation(libs.file.picker.coil)
 
                 implementation(libs.permissions)
+                implementation(libs.compose.webview)
             }
         }
 
