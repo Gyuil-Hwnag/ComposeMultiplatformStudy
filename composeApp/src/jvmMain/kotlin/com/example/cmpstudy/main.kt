@@ -46,7 +46,7 @@ fun main() {
             state = state,
             alwaysOnTop = true
         ) {
-            App()
+            WebViewSettings()
         }
     }
 }
