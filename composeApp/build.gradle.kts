@@ -16,6 +16,24 @@ plugins {
     alias(libs.plugins.room)
 }
 
+// Helper function for Desktop JVM MapLibre native bindings
+fun detectTarget(): String {
+    val hostOs = when (val os = System.getProperty("os.name").lowercase()) {
+        "mac os x" -> "macos"
+        else -> os.split(" ").first()
+    }
+    val hostArch = when (val arch = System.getProperty("os.arch").lowercase()) {
+        "x86_64" -> "amd64"
+        "arm64" -> "aarch64"
+        else -> arch
+    }
+    val renderer = when (hostOs) {
+        "macos" -> "metal"
+        else -> "opengl"
+    }
+    return "${hostOs}-${hostArch}-${renderer}"
+}
+
 kotlin {
     // --- Targets Configuration ---
     androidTarget {
@@ -84,6 +102,7 @@ kotlin {
                 implementation(libs.file.picker.coil)
 
                 implementation(libs.permissions)
+                implementation(libs.maplibre.compose)
             }
         }
 
@@ -134,6 +153,12 @@ kotlin {
                 implementation(compose.desktop.currentOs)
                 implementation(libs.kotlinx.coroutinesSwing)
                 implementation(libs.ktor.client.okhttp)
+                // MapLibre native bindings for Desktop
+                runtimeOnly("org.maplibre.compose:maplibre-native-bindings-jni:0.12.1") {
+                    capabilities {
+                        requireCapability("org.maplibre.compose:maplibre-native-bindings-jni-${detectTarget()}")
+                    }
+                }
             }
         }
 

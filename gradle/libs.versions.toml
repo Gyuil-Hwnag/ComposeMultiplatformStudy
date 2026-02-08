@@ -36,6 +36,8 @@ filePickerCoil = "0.5.1"
 permissions = "0.9.0"
 ## https://github.com/KevinnZou/compose-webview-multiplatform/releases
 webview = "2.0.3"
+## https://github.com/maplibre/maplibre-compose/releases
+maplibre = "0.12.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -88,6 +90,7 @@ file-picker = { module = "com.mohamedrejeb.calf:calf-file-picker", version.ref =
 file-picker-coil = { module = "com.mohamedrejeb.calf:calf-file-picker-coil", version.ref = "filePickerCoil" }
 permissions = { module = "com.mohamedrejeb.calf:calf-permissions", version.ref = "permissions" }
 compose-webview = { module = "io.github.kevinnzou:compose-webview-multiplatform", version.ref = "webview" }
+maplibre-compose = { module = "org.maplibre.compose:maplibre-compose", version.ref = "maplibre" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
