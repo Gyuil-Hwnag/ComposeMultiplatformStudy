@@ -255,7 +255,7 @@ compose.desktop {
     }
 }
 
-// NOTE: Desktop(Jvm) WebView 기능을 위한 설정 추가.
+// NOTE: WebView Desktop(Jvm) 기능을 위한 설정 추가.
 afterEvaluate {
     tasks.withType<JavaExec> {
         jvmArgs("--add-opens", "java.desktop/sun.awt=ALL-UNNAMED")
