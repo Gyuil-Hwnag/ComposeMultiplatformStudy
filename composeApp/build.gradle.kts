@@ -14,9 +14,10 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    alias(libs.plugins.kotlinCocoapods)
 }
 
-// Helper function for Desktop JVM MapLibre native bindings
+// NOTE: MapLibre Helper function for Desktop JVM native bindings
 fun detectTarget(): String {
     val hostOs = when (val os = System.getProperty("os.name").lowercase()) {
         "mac os x" -> "macos"
@@ -35,7 +36,6 @@ fun detectTarget(): String {
 }
 
 kotlin {
-    // --- Targets Configuration ---
     androidTarget {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
@@ -52,6 +52,21 @@ kotlin {
         }
     }
 
+    // NOTE: CocoaPods Configuration for KMP
+    cocoapods {
+        version = "1.0.0"
+        summary = "CmpStudy Compose Multiplatform shared module"
+        homepage = "https://github.com/example/cmpstudy"
+        ios.deploymentTarget = "14.0"
+
+        pod("MapLibre", "6.17.1")
+
+        framework {
+            baseName = "ComposeApp"
+            isStatic = true
+        }
+    }
+
     jvm()
 
     js {
@@ -59,7 +74,7 @@ kotlin {
         binaries.executable()
     }
 
-    // WasmJS는 Firebase를 지원하지 않으므로 주석 처리
+    // NOTE: WasmJS는 Firebase를 지원하지 않으므로 주석 처리
 //    @OptIn(ExperimentalWasmDsl::class)
 //    wasmJs {
 //        browser()
