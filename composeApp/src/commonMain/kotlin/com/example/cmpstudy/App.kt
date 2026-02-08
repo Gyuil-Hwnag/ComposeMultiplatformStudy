@@ -1,9 +1,9 @@
 package com.example.cmpstudy
 
 import androidx.compose.runtime.Composable
-import com.example.cmpstudy.webview.WebViewScreenRoot
+import com.example.cmpstudy.map.MapScreenRoot
 
 @Composable
 fun App() {
-    WebViewScreenRoot()
+    MapScreenRoot()
 }

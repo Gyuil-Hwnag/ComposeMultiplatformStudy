@@ -14,10 +14,28 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    alias(libs.plugins.kotlinCocoapods)
+}
+
+// NOTE: MapLibre Helper function for Desktop JVM native bindings
+fun detectTarget(): String {
+    val hostOs = when (val os = System.getProperty("os.name").lowercase()) {
+        "mac os x" -> "macos"
+        else -> os.split(" ").first()
+    }
+    val hostArch = when (val arch = System.getProperty("os.arch").lowercase()) {
+        "x86_64" -> "amd64"
+        "arm64" -> "aarch64"
+        else -> arch
+    }
+    val renderer = when (hostOs) {
+        "macos" -> "metal"
+        else -> "opengl"
+    }
+    return "${hostOs}-${hostArch}-${renderer}"
 }
 
 kotlin {
-    // --- Targets Configuration ---
     androidTarget {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
@@ -34,6 +52,21 @@ kotlin {
         }
     }
 
+    // NOTE: CocoaPods Configuration for KMP
+    cocoapods {
+        version = "1.0.0"
+        summary = "CmpStudy Compose Multiplatform shared module"
+        homepage = "https://github.com/example/cmpstudy"
+        ios.deploymentTarget = "14.0"
+
+        pod("MapLibre", "6.17.1")
+
+        framework {
+            baseName = "ComposeApp"
+            isStatic = true
+        }
+    }
+
     jvm()
 
     js {
@@ -41,7 +74,7 @@ kotlin {
         binaries.executable()
     }
 
-    // WasmJS는 Firebase를 지원하지 않으므로 주석 처리
+    // NOTE: WasmJS는 Firebase를 지원하지 않으므로 주석 처리
 //    @OptIn(ExperimentalWasmDsl::class)
 //    wasmJs {
 //        browser()
@@ -84,6 +117,7 @@ kotlin {
                 implementation(libs.file.picker.coil)
 
                 implementation(libs.permissions)
+                implementation(libs.maplibre.compose)
             }
         }
 
@@ -134,6 +168,12 @@ kotlin {
                 implementation(compose.desktop.currentOs)
                 implementation(libs.kotlinx.coroutinesSwing)
                 implementation(libs.ktor.client.okhttp)
+                // MapLibre native bindings for Desktop
+                runtimeOnly("org.maplibre.compose:maplibre-native-bindings-jni:0.12.1") {
+                    capabilities {
+                        requireCapability("org.maplibre.compose:maplibre-native-bindings-jni-${detectTarget()}")
+                    }
+                }
             }
         }
 
@@ -215,7 +255,7 @@ compose.desktop {
     }
 }
 
-// NOTE: Desktop(Jvm) WebView 기능을 위한 설정 추가.
+// NOTE: WebView Desktop(Jvm) 기능을 위한 설정 추가.
 afterEvaluate {
     tasks.withType<JavaExec> {
         jvmArgs("--add-opens", "java.desktop/sun.awt=ALL-UNNAMED")
