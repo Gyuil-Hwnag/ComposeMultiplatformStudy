@@ -23,3 +23,7 @@ node_modules/
 **/FirebaseConfig.kt
 google-services.json
 GoogleService-Info.plist
+
+# CocoaPods
+iosApp/Pods/
+iosApp/iosApp.xcworkspace/
