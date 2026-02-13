@@ -39,20 +39,19 @@ fun MapScreenRoot() {
     var position by remember { mutableStateOf<Position?>(null) }
     var pendingLocationRequest by remember { mutableStateOf(false) }
 
-    LaunchedEffect(isGranted) {
-        if (pendingLocationRequest && isGranted) {
-            locationState.location?.let { location ->
-                position = location.position
-                cameraState.animateTo(
-                    finalPosition = CameraPosition(
-                        target = location.position,
-                        zoom = MapConfig.DEFAULT_ZOOM
-                    ),
-                    duration = MapConfig.ANIMATION_DURATION_MS.milliseconds
-                )
-            }
-            pendingLocationRequest = false
-        }
+    LaunchedEffect(isGranted, locationState.location) {
+        if (!pendingLocationRequest) return@LaunchedEffect
+        if (!isGranted) return@LaunchedEffect
+        val location = locationState.location ?: return@LaunchedEffect
+        position = location.position
+        cameraState.animateTo(
+            finalPosition = CameraPosition(
+                target = location.position,
+                zoom = MapConfig.DEFAULT_ZOOM
+            ),
+            duration = MapConfig.ANIMATION_DURATION_MS.milliseconds
+        )
+        pendingLocationRequest = false
     }
 
     Box(
