@@ -1,4 +1,4 @@
-package com.example.cmpstudy.map
+package com.example.cmpstudy.map.utils
 
 object MapStyle {
 

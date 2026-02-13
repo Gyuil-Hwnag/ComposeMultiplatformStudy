@@ -1,4 +1,4 @@
-package com.example.cmpstudy.map
+package com.example.cmpstudy.map.utils
 
 object MapConfig {
     const val DEFAULT_ZOOM = 16.0
