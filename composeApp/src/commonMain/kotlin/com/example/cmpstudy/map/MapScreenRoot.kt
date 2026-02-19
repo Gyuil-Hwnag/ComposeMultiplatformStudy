@@ -7,6 +7,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cmpstudy.composeapp.generated.resources.Res
 import cmpstudy.composeapp.generated.resources.marker
+import cmpstudy.composeapp.generated.resources.pointer_marker
 import com.example.cmpstudy.map.presentation.Marker
 import com.example.cmpstudy.map.presentation.MyLocationButton
 import com.example.cmpstudy.map.utils.MapConfig
@@ -22,8 +23,11 @@ import org.maplibre.compose.camera.rememberCameraState
 import org.maplibre.compose.location.rememberDefaultLocationProvider
 import org.maplibre.compose.location.rememberNullLocationProvider
 import org.maplibre.compose.location.rememberUserLocationState
+import org.maplibre.compose.map.MapOptions
 import org.maplibre.compose.map.MaplibreMap
+import org.maplibre.compose.map.OrnamentOptions
 import org.maplibre.compose.style.BaseStyle
+import org.maplibre.compose.util.ClickResult
 import org.maplibre.spatialk.geojson.Position
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -36,14 +40,15 @@ fun MapScreenRoot() {
     val isGranted = permissionState.status.isGranted
     val locationProvider = if (isGranted) rememberDefaultLocationProvider() else rememberNullLocationProvider()
     val locationState = rememberUserLocationState(locationProvider)
-    var position by remember { mutableStateOf<Position?>(null) }
+    var myLocationPosition by remember { mutableStateOf<Position?>(null) }
     var pendingLocationRequest by remember { mutableStateOf(false) }
+    var clickPosition by remember { mutableStateOf<Position?>(null) }
 
     LaunchedEffect(isGranted, locationState.location) {
         if (!pendingLocationRequest) return@LaunchedEffect
         if (!isGranted) return@LaunchedEffect
         val location = locationState.location ?: return@LaunchedEffect
-        position = location.position
+        myLocationPosition = location.position
         cameraState.animateTo(
             finalPosition = CameraPosition(
                 target = location.position,
@@ -61,13 +66,25 @@ fun MapScreenRoot() {
         MaplibreMap(
             modifier = Modifier.fillMaxSize(),
             cameraState = cameraState,
-            baseStyle = BaseStyle.Uri(MapStyle.OpenFreeMap.BRIGHT)
+            baseStyle = BaseStyle.Uri(MapStyle.OpenFreeMap.BRIGHT),
+            options = MapOptions(ornamentOptions = OrnamentOptions.AllDisabled),
+            onMapClick = { position, _ ->
+                clickPosition = position
+                ClickResult.Pass
+            }
         ) {
-            position?.let { position ->
+            myLocationPosition?.let { pos ->
                 Marker(
                     id = "MyLocationMarker",
-                    position = position,
+                    position = pos,
                     painter = painterResource(Res.drawable.marker)
+                )
+            }
+            clickPosition?.let { pos ->
+                Marker(
+                    id = "ClickMarker",
+                    position = pos,
+                    painter = painterResource(Res.drawable.pointer_marker)
                 )
             }
         }
@@ -75,7 +92,7 @@ fun MapScreenRoot() {
             onClick = {
                 if (isGranted) {
                     locationState.location?.let { location ->
-                        position = location.position
+                        myLocationPosition = location.position
                         scope.launch {
                             cameraState.animateTo(
                                 finalPosition = CameraPosition(
