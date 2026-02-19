@@ -1,15 +1,19 @@
 package com.example.cmpstudy.map
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import cmpstudy.composeapp.generated.resources.Res
 import cmpstudy.composeapp.generated.resources.marker
+import cmpstudy.composeapp.generated.resources.pin_marker
 import cmpstudy.composeapp.generated.resources.pointer_marker
 import com.example.cmpstudy.map.presentation.Marker
 import com.example.cmpstudy.map.presentation.MyLocationButton
+import com.example.cmpstudy.map.presentation.PinLocationButton
 import com.example.cmpstudy.map.utils.MapConfig
 import com.example.cmpstudy.map.utils.MapStyle
 import com.mohamedrejeb.calf.permissions.ExperimentalPermissionsApi
@@ -43,6 +47,7 @@ fun MapScreenRoot() {
     var myLocationPosition by remember { mutableStateOf<Position?>(null) }
     var pendingLocationRequest by remember { mutableStateOf(false) }
     var clickPosition by remember { mutableStateOf<Position?>(null) }
+    var isPinMode by rememberSaveable { mutableStateOf(false) }
 
     LaunchedEffect(isGranted, locationState.location) {
         if (!pendingLocationRequest) return@LaunchedEffect
@@ -59,10 +64,7 @@ fun MapScreenRoot() {
         pendingLocationRequest = false
     }
 
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.BottomEnd
-    ) {
+    Box(modifier = Modifier.fillMaxSize()) {
         MaplibreMap(
             modifier = Modifier.fillMaxSize(),
             cameraState = cameraState,
@@ -88,27 +90,57 @@ fun MapScreenRoot() {
                 )
             }
         }
-        MyLocationButton(
-            onClick = {
-                if (isGranted) {
-                    locationState.location?.let { location ->
-                        myLocationPosition = location.position
-                        scope.launch {
-                            cameraState.animateTo(
-                                finalPosition = CameraPosition(
-                                    target = location.position,
-                                    zoom = MapConfig.DEFAULT_ZOOM
-                                ),
-                                duration = MapConfig.ANIMATION_DURATION_MS.milliseconds
-                            )
-                        }
+        if (isPinMode) {
+            Image(
+                painter = painterResource(Res.drawable.pin_marker),
+                contentDescription = "PinMarker",
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .offset(y = (-24).dp)
+                    .size(48.dp)
+            )
+        }
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .align(Alignment.BottomEnd)
+                .padding(bottom = 48.dp),
+            contentAlignment = Alignment.BottomEnd
+        ) {
+            PinLocationButton(
+                isActive = isPinMode,
+                onClick = {
+                    if (isPinMode) {
+                        clickPosition = cameraState.position.target
+                        isPinMode = false
+                    } else {
+                        isPinMode = true
                     }
-                } else {
-                    pendingLocationRequest = true
-                    permissionState.launchPermissionRequest()
                 }
-            }
-        )
+            )
+            MyLocationButton(
+                onClick = {
+                    if (isGranted) {
+                        locationState.location?.let { location ->
+                            myLocationPosition = location.position
+                            scope.launch {
+                                cameraState.animateTo(
+                                    finalPosition = CameraPosition(
+                                        target = location.position,
+                                        zoom = MapConfig.DEFAULT_ZOOM
+                                    ),
+                                    duration = MapConfig.ANIMATION_DURATION_MS.milliseconds
+                                )
+                            }
+                        }
+                    } else {
+                        pendingLocationRequest = true
+                        permissionState.launchPermissionRequest()
+                    }
+                }
+            )
+        }
     }
 }
 
