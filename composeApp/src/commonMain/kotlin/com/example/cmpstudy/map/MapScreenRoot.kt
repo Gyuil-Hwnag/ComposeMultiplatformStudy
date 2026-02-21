@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cmpstudy.composeapp.generated.resources.*
+import com.example.cmpstudy.map.presentation.Polyline
 import com.example.cmpstudy.map.presentation.Marker
 import com.example.cmpstudy.map.presentation.MyLocationButton
 import com.example.cmpstudy.map.presentation.PinLocationButton
@@ -106,6 +107,14 @@ fun MapScreenRoot() {
                         id = "ClickMarker",
                         position = pos,
                         painter = painterResource(Res.drawable.pointer_marker)
+                    )
+                }
+
+                if (myLocationPosition != null && clickPosition != null) {
+                    Polyline(
+                        id = "ConnectionPolyline",
+                        start = myLocationPosition!!,
+                        end = clickPosition!!
                     )
                 }
             }
