@@ -1,7 +1,8 @@
 package com.example.cmpstudy.map
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -9,12 +10,11 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import cmpstudy.composeapp.generated.resources.*
-import com.example.cmpstudy.map.presentation.Polyline
-import com.example.cmpstudy.map.presentation.Marker
-import com.example.cmpstudy.map.presentation.MyLocationButton
-import com.example.cmpstudy.map.presentation.PinLocationButton
+import cmpstudy.composeapp.generated.resources.Res
+import cmpstudy.composeapp.generated.resources.map_pin_location_format
+import cmpstudy.composeapp.generated.resources.marker
+import cmpstudy.composeapp.generated.resources.pointer_marker
+import com.example.cmpstudy.map.presentation.*
 import com.example.cmpstudy.map.utils.MapConfig
 import com.example.cmpstudy.map.utils.MapStyle
 import com.example.cmpstudy.map.utils.roundTo
@@ -43,6 +43,7 @@ import kotlin.time.Duration.Companion.milliseconds
 @Composable
 fun MapScreenRoot() {
     val scope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
     val cameraState = rememberCameraState()
     val permissionState = rememberPermissionState(Permission.FineLocation)
     val isGranted = permissionState.status.isGranted
@@ -51,11 +52,10 @@ fun MapScreenRoot() {
     var myLocationPosition by remember { mutableStateOf<Position?>(null) }
     var pendingLocationRequest by remember { mutableStateOf(false) }
     var clickPosition by remember { mutableStateOf<Position?>(null) }
-    var isPinMode by rememberSaveable { mutableStateOf(false) }
-    val snackbarHostState = remember { SnackbarHostState() }
+    var showPinMarker by rememberSaveable { mutableStateOf(false) }
 
-    LaunchedEffect(isPinMode, cameraState.position.target) {
-        if (!isPinMode) return@LaunchedEffect
+    LaunchedEffect(showPinMarker, cameraState.position.target) {
+        if (!showPinMarker) return@LaunchedEffect
         delay(500)
         val target = cameraState.position.target
         snackbarHostState.showSnackbar(
@@ -84,7 +84,11 @@ fun MapScreenRoot() {
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { paddingValues ->
-        Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+        ) {
             MaplibreMap(
                 modifier = Modifier.fillMaxSize(),
                 cameraState = cameraState,
@@ -109,7 +113,6 @@ fun MapScreenRoot() {
                         painter = painterResource(Res.drawable.pointer_marker)
                     )
                 }
-
                 if (myLocationPosition != null && clickPosition != null) {
                     Polyline(
                         id = "ConnectionPolyline",
@@ -119,15 +122,8 @@ fun MapScreenRoot() {
                 }
             }
 
-            if (isPinMode) {
-                Image(
-                    painter = painterResource(Res.drawable.pin_marker),
-                    contentDescription = "PinMarker",
-                    modifier = Modifier
-                        .align(Alignment.Center)
-                        .offset(y = (-24).dp)
-                        .size(48.dp)
-                )
+            if (showPinMarker) {
+                PinMarker(modifier = Modifier.align(Alignment.Center))
             }
 
             Box(
@@ -136,9 +132,9 @@ fun MapScreenRoot() {
                     .align(Alignment.BottomEnd),
                 contentAlignment = Alignment.BottomEnd
             ) {
-                PinLocationButton(
-                    isActive = isPinMode,
-                    onClick = { isPinMode = !isPinMode }
+                PinMarkerButton(
+                    isActive = showPinMarker,
+                    onClick = { showPinMarker = !showPinMarker }
                 )
                 MyLocationButton(
                     onClick = {
