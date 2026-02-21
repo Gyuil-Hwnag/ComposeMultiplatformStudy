@@ -14,7 +14,7 @@ import org.maplibre.spatialk.geojson.Position
 
 @Composable
 fun Marker(id: String, position: Position, painter: Painter) {
-    val source = rememberGeoJsonSource(GeoJsonData.JsonString(GeoJsonHelper.createPointFeature(position)))
+    val source = rememberGeoJsonSource(GeoJsonData.JsonString(GeoJsonHelper.createPoint(position)))
     SymbolLayer(
         id = id,
         source = source,
