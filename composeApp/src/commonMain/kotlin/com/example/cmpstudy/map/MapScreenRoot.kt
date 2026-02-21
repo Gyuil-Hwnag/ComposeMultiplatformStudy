@@ -97,7 +97,7 @@ fun MapScreenRoot() {
                 onMapClick = { position, _ ->
                     clickPosition = position
                     ClickResult.Pass
-                }
+                },
             ) {
                 myLocationPosition?.let { pos ->
                     Marker(
@@ -110,7 +110,8 @@ fun MapScreenRoot() {
                     Marker(
                         id = "ClickMarker",
                         position = pos,
-                        painter = painterResource(Res.drawable.pointer_marker)
+                        painter = painterResource(Res.drawable.pointer_marker),
+                        onClick = { clickPosition = null }
                     )
                 }
                 if (myLocationPosition != null && clickPosition != null) {

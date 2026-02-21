@@ -10,10 +10,16 @@ import org.maplibre.compose.expressions.value.SymbolAnchor
 import org.maplibre.compose.layers.SymbolLayer
 import org.maplibre.compose.sources.GeoJsonData
 import org.maplibre.compose.sources.rememberGeoJsonSource
+import org.maplibre.compose.util.ClickResult
 import org.maplibre.spatialk.geojson.Position
 
 @Composable
-fun Marker(id: String, position: Position, painter: Painter) {
+fun Marker(
+    id: String,
+    position: Position,
+    painter: Painter,
+    onClick: (() -> Unit)? = null
+) {
     val source = rememberGeoJsonSource(GeoJsonData.JsonString(GeoJsonHelper.createPoint(position)))
     SymbolLayer(
         id = id,
@@ -21,6 +27,7 @@ fun Marker(id: String, position: Position, painter: Painter) {
         iconImage = image(painter),
         iconSize = const(MapConfig.MARKER_SIZE),
         iconAnchor = const(SymbolAnchor.Bottom),
-        iconAllowOverlap = const(true)
+        iconAllowOverlap = const(true),
+        onClick = onClick?.let { { _ -> it(); ClickResult.Consume } }
     )
 }
