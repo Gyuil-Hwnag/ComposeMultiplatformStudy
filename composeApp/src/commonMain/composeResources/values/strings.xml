@@ -22,4 +22,7 @@
     <string name="error_too_many_requests">Your quota seems to be exceeded.</string>
     <string name="error_serialization">Couldn't parse data.</string>
     <string name="map_pin_location_format">Lat: %1$s, Lng: %2$s</string>
+    <string name="map_distance_format">Distance: %1$s km</string>
+    <string name="map_distance_meters">%1$sm</string>
+    <string name="map_distance_kilometers">%1$skm</string>
 </resources>

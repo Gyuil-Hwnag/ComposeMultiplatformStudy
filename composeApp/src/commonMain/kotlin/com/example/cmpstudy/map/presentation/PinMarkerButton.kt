@@ -15,7 +15,7 @@ import cmpstudy.composeapp.generated.resources.pin_location
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun PinLocationButton(
+fun PinMarkerButton(
     isActive: Boolean,
     onClick: () -> Unit
 ) {
