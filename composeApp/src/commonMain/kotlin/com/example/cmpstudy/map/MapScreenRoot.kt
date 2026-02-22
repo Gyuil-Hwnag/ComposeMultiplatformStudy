@@ -11,10 +11,13 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cmpstudy.composeapp.generated.resources.Res
+import cmpstudy.composeapp.generated.resources.map_distance_kilometers
+import cmpstudy.composeapp.generated.resources.map_distance_meters
 import cmpstudy.composeapp.generated.resources.map_pin_location_format
 import cmpstudy.composeapp.generated.resources.marker
 import cmpstudy.composeapp.generated.resources.pointer_marker
 import com.example.cmpstudy.map.presentation.*
+import com.example.cmpstudy.map.utils.DistanceUtils
 import com.example.cmpstudy.map.utils.MapConfig
 import com.example.cmpstudy.map.utils.MapStyle
 import com.example.cmpstudy.map.utils.roundTo
@@ -79,6 +82,18 @@ fun MapScreenRoot() {
             duration = MapConfig.ANIMATION_DURATION_MS.milliseconds
         )
         pendingLocationRequest = false
+    }
+
+    LaunchedEffect(clickPosition) {
+        val clickPos = clickPosition ?: return@LaunchedEffect
+        val myPos = myLocationPosition ?: return@LaunchedEffect
+        val distance = DistanceUtils.calculateDistance(myPos, clickPos)
+        val distanceText = if (distance < 1.0) {
+            getString(Res.string.map_distance_meters, (distance * 1000).toInt())
+        } else {
+            getString(Res.string.map_distance_kilometers, distance.roundTo(2))
+        }
+        snackbarHostState.showSnackbar(distanceText)
     }
 
     Scaffold(
