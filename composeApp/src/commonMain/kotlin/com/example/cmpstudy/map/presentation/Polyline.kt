@@ -15,7 +15,7 @@ fun Polyline(
     id: String,
     start: Position,
     end: Position,
-    color: Color = Color.Blue,
+    color: Color = Color.Gray,
     dashPattern: List<Float> = listOf(2f, 2f)
 ) {
     val source = rememberGeoJsonSource(GeoJsonData.JsonString(GeoJsonHelper.createPolyline(start, end)))
