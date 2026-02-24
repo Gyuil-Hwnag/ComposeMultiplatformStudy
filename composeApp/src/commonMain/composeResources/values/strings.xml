@@ -25,4 +25,16 @@
     <string name="map_distance_format">Distance: %1$s km</string>
     <string name="map_distance_meters">%1$sm</string>
     <string name="map_distance_kilometers">%1$skm</string>
+
+
+    <!--Navigator-->
+    <string name="start">Start</string>
+    <string name="book_pedia">BookPedia</string>
+    <string name="date_time">DateTime</string>
+    <string name="file_picker">FilePicker</string>
+    <string name="location">Location</string>
+    <string name="login">Login</string>
+    <string name="map">Map</string>
+    <string name="permission">Permission</string>
+    <string name="webview">Webview</string>
 </resources>
