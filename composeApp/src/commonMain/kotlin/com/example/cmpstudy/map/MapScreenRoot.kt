@@ -10,6 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import cmpstudy.composeapp.generated.resources.Res
 import cmpstudy.composeapp.generated.resources.map_distance_kilometers
 import cmpstudy.composeapp.generated.resources.map_distance_meters
@@ -98,11 +99,9 @@ fun MapScreenRoot() {
 
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) }
-    ) { paddingValues ->
+    ) { _ ->
         Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
+            modifier = Modifier.fillMaxSize()
         ) {
             MaplibreMap(
                 modifier = Modifier.fillMaxSize(),
@@ -145,7 +144,8 @@ fun MapScreenRoot() {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .align(Alignment.BottomEnd),
+                    .align(Alignment.BottomEnd)
+                    .padding(bottom = 48.dp),
                 contentAlignment = Alignment.BottomEnd
             ) {
                 PinMarkerButton(
