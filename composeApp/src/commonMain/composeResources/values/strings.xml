@@ -26,6 +26,11 @@
     <string name="map_distance_meters">%1$sm</string>
     <string name="map_distance_kilometers">%1$skm</string>
 
+    <string name="android">Android</string>
+    <string name="ios">iOS</string>
+    <string name="web">Web</string>
+    <string name="desktop">Desktop</string>
+
 
     <!--Navigator-->
     <string name="start">Start</string>
