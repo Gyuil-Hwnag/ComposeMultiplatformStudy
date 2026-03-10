@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.example.cmpstudy.bookpedia.app.BookPediaScreen
+import com.example.cmpstudy.chart.ChartScreen
 import com.example.cmpstudy.date.DateTimeScreen
 import com.example.cmpstudy.file.FilePickerScreenRoot
 import com.example.cmpstudy.location.LocationScreen
@@ -59,6 +60,10 @@ fun AppRoot() {
 
             composable<AppRoutes.WebView> {
                 WebViewScreenRoot()
+            }
+
+            composable<AppRoutes.Chart> {
+                ChartScreen()
             }
         }
     }
