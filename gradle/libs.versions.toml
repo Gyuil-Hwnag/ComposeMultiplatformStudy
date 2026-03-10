@@ -38,6 +38,8 @@ permissions = "0.9.0"
 webview = "2.0.3"
 ## https://github.com/maplibre/maplibre-compose/releases
 maplibre = "0.12.1"
+## https://github.com/TheChance101/AAY-chart
+aayChart = "1.1.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -91,6 +93,7 @@ file-picker-coil = { module = "com.mohamedrejeb.calf:calf-file-picker-coil", ver
 permissions = { module = "com.mohamedrejeb.calf:calf-permissions", version.ref = "permissions" }
 compose-webview = { module = "io.github.kevinnzou:compose-webview-multiplatform", version.ref = "webview" }
 maplibre-compose = { module = "org.maplibre.compose:maplibre-compose", version.ref = "maplibre" }
+aay-chart = { module = "io.github.thechance101:chart", version.ref = "aayChart" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

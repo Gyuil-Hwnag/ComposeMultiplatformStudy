@@ -118,6 +118,7 @@ kotlin {
 
                 implementation(libs.permissions)
                 implementation(libs.maplibre.compose)
+                implementation(libs.aay.chart)
             }
         }
 
