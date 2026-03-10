@@ -9,24 +9,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import cmpstudy.composeapp.generated.resources.Res
-import cmpstudy.composeapp.generated.resources.android
-import cmpstudy.composeapp.generated.resources.desktop
-import cmpstudy.composeapp.generated.resources.ios
-import cmpstudy.composeapp.generated.resources.web
+import cmpstudy.composeapp.generated.resources.*
 import com.aay.compose.donutChart.DonutChart
 import com.aay.compose.donutChart.model.PieChartData
-import com.example.cmpstudy.core.presentation.AndroidColor
-import com.example.cmpstudy.core.presentation.DesktopColor
-import com.example.cmpstudy.core.presentation.PreviewDevices
-import com.example.cmpstudy.core.presentation.WebColor
-import com.example.cmpstudy.core.presentation.iosColor
+import com.example.cmpstudy.core.presentation.*
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun DonutChartSection() {
     Text(
-        text = "Donut Chart",
+        text = stringResource(Res.string.donut_chart),
         style = MaterialTheme.typography.titleLarge,
         modifier = Modifier.padding(bottom = 16.dp)
     )

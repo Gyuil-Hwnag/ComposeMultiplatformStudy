@@ -22,7 +22,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun LineChartSection() {
     Text(
-        text = "Line Chart",
+        text = stringResource(Res.string.line_chart),
         style = MaterialTheme.typography.titleLarge,
         modifier = Modifier.padding(bottom = 16.dp)
     )

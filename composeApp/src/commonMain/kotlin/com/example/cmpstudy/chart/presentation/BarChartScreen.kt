@@ -19,7 +19,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun BarChartSection() {
     Text(
-        text = "Bar Chart",
+        text = stringResource(Res.string.bar_chart),
         style = MaterialTheme.typography.titleLarge,
         modifier = Modifier.padding(bottom = 16.dp)
     )

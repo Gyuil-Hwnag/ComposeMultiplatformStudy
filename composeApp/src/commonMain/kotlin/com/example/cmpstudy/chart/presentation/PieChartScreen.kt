@@ -9,11 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import cmpstudy.composeapp.generated.resources.Res
-import cmpstudy.composeapp.generated.resources.android
-import cmpstudy.composeapp.generated.resources.desktop
-import cmpstudy.composeapp.generated.resources.ios
-import cmpstudy.composeapp.generated.resources.web
+import cmpstudy.composeapp.generated.resources.*
 import com.aay.compose.donutChart.PieChart
 import com.aay.compose.donutChart.model.PieChartData
 import com.example.cmpstudy.core.presentation.AndroidColor
@@ -25,7 +21,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun PieChartSection() {
     Text(
-        text = "Pie Chart",
+        text = stringResource(Res.string.pie_chart),
         style = MaterialTheme.typography.titleLarge,
         modifier = Modifier.padding(bottom = 16.dp)
     )

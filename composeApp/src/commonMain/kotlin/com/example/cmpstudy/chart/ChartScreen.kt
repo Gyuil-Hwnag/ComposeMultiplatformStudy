@@ -13,16 +13,27 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import cmpstudy.composeapp.generated.resources.Res
+import cmpstudy.composeapp.generated.resources.bar_chart
+import cmpstudy.composeapp.generated.resources.donut_chart
+import cmpstudy.composeapp.generated.resources.line_chart
+import cmpstudy.composeapp.generated.resources.pie_chart
 import com.example.cmpstudy.White
 import com.example.cmpstudy.chart.presentation.BarChartSection
 import com.example.cmpstudy.chart.presentation.DonutChartSection
 import com.example.cmpstudy.chart.presentation.LineChartSection
 import com.example.cmpstudy.chart.presentation.PieChartSection
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ChartScreen() {
     var selectedTabIndex by remember { mutableStateOf(0) }
-    val tabs = listOf("Line", "Bar", "Pie", "Donut")
+    val tabs = listOf(
+        stringResource(Res.string.line_chart),
+        stringResource(Res.string.bar_chart),
+        stringResource(Res.string.pie_chart),
+        stringResource(Res.string.donut_chart)
+    )
 
     Column(
         modifier = Modifier.fillMaxSize()

@@ -31,6 +31,11 @@
     <string name="web">Web</string>
     <string name="desktop">Desktop</string>
 
+    <string name="line_chart">Line Chart</string>
+    <string name="bar_chart">Bar Chart</string>
+    <string name="pie_chart">Pie Chart</string>
+    <string name="donut_chart">Donut Chart</string>
+
 
     <!--Navigator-->
     <string name="start">Start</string>
