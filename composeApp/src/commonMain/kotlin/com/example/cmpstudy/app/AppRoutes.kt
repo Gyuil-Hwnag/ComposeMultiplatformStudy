@@ -34,4 +34,7 @@ sealed interface AppRoutes {
 
     @Serializable
     data object WebView: AppRoutes
+
+    @Serializable
+    data object Chart: AppRoutes
 }

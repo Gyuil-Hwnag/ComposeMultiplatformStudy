@@ -26,6 +26,16 @@
     <string name="map_distance_meters">%1$sm</string>
     <string name="map_distance_kilometers">%1$skm</string>
 
+    <string name="android">Android</string>
+    <string name="ios">iOS</string>
+    <string name="web">Web</string>
+    <string name="desktop">Desktop</string>
+
+    <string name="line_chart">Line Chart</string>
+    <string name="bar_chart">Bar Chart</string>
+    <string name="pie_chart">Pie Chart</string>
+    <string name="donut_chart">Donut Chart</string>
+
 
     <!--Navigator-->
     <string name="start">Start</string>
@@ -37,4 +47,5 @@
     <string name="map">Map</string>
     <string name="permission">Permission</string>
     <string name="webview">Webview</string>
+    <string name="chart">Chart</string>
 </resources>

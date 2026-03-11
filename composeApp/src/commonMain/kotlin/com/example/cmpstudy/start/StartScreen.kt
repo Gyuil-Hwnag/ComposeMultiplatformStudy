@@ -49,6 +49,7 @@ private fun StartButton(
         AppRoutes.Map -> Res.string.map
         AppRoutes.Permission -> Res.string.permission
         AppRoutes.WebView -> Res.string.webview
+        AppRoutes.Chart -> Res.string.chart
         else -> Res.string.start
     }
     Button(
@@ -67,4 +68,5 @@ private val DEFAULT_ROUTES = listOf<AppRoutes>(
     AppRoutes.Map,
     AppRoutes.Permission,
     AppRoutes.WebView,
+    AppRoutes.Chart
 )
