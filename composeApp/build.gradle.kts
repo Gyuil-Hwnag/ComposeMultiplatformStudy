@@ -244,6 +244,17 @@ dependencies {
     }
 }
 
+configurations.configureEach {
+    resolutionStrategy.dependencySubstitution {
+        // AAY Chart 1.1.0 publishes working common/js/android/jvm artifacts,
+        // but its Gradle metadata points iOS variants to unpublished 1.1.0 modules.
+        substitute(module("io.github.thechance101:chart-iosarm64:1.1.0"))
+            .using(module("io.github.thechance101:chart-iosarm64:Beta-0.0.5"))
+        substitute(module("io.github.thechance101:chart-iossimulatorarm64:1.1.0"))
+            .using(module("io.github.thechance101:chart-iossimulatorarm64:Beta-0.0.5"))
+    }
+}
+
 compose.desktop {
     application {
         mainClass = "com.example.cmpstudy.MainKt"

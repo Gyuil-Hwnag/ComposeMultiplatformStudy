@@ -39,8 +39,8 @@ webview = "2.0.3"
 ## https://github.com/maplibre/maplibre-compose/releases
 maplibre = "0.12.1"
 ## https://github.com/TheChance101/AAY-chart
-## 1.1.0 advertises iOS variants in Gradle metadata, but those artifacts are not published.
-aayChart = "Beta-0.0.5"
+## Keep 1.1.0 for common/js/android/jvm; iOS artifacts are substituted in composeApp/build.gradle.kts.
+aayChart = "1.1.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
