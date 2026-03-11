@@ -1,10 +1,7 @@
 package com.example.cmpstudy.chart
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.SecondaryScrollableTabRow
@@ -13,11 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import cmpstudy.composeapp.generated.resources.Res
-import cmpstudy.composeapp.generated.resources.bar_chart
-import cmpstudy.composeapp.generated.resources.donut_chart
-import cmpstudy.composeapp.generated.resources.line_chart
-import cmpstudy.composeapp.generated.resources.pie_chart
+import cmpstudy.composeapp.generated.resources.*
 import com.example.cmpstudy.White
 import com.example.cmpstudy.chart.presentation.BarChartSection
 import com.example.cmpstudy.chart.presentation.DonutChartSection
@@ -36,7 +29,10 @@ fun ChartScreen() {
     )
 
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .background(White)
+            .systemBarsPadding()
     ) {
         SecondaryScrollableTabRow(
             selectedTabIndex = selectedTabIndex,
